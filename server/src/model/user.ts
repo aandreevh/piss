@@ -2,7 +2,10 @@ import { BaseModel } from './base-mode';
 
 export class User extends BaseModel {
   name!: string;
-  age!: number;
+ // pictureUrl!: string; TODO: check if possible ?/
+
   username!: string;
-  password?: string;
+  idToken!: string;
+  accessToken!: string;
+  refreshToken!: string;
 }
