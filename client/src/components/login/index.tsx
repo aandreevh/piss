@@ -1,4 +1,5 @@
 import { Button } from '@material-ui/core';
+import { current } from 'immer';
 import React, { useCallback, useEffect, useState } from 'react';
 import GoogleLogin from 'react-google-login';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,7 +21,7 @@ export default function LoginComponent() {
     if(currentUser) {
       <Redirect to='home'/>
     }
-  })
+  }, [currentUser])
 
   return (
     <div>
@@ -29,11 +30,12 @@ export default function LoginComponent() {
         currentUser ? <Redirect to='/'/> :
         <GoogleLogin
           // extract that in my environment file
-          clientId={"676063303337-udme1hkcset0fug4h0dgqc6bj957ls16.apps.googleusercontent.com"}
+          clientId={process.env.CLIENT_ID}
           onSuccess={onSuccess}
           onFailure={onFailure}
           cookiePolicy="single_host_origin"
           responseType="code"
+          accessType="offline"
         >
         </GoogleLogin> 
       }

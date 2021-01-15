@@ -22,6 +22,12 @@ export default function currentUserReducer(
         user: action.arg,
         error: ''
       }
+    case ACTIONS_ENUM.CURRENT_USER_FAILED: 
+      return {
+        loading: false,
+        user: null,
+        error: ''
+      }
     default: 
       return state;
   }

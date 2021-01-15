@@ -26,12 +26,12 @@ export const setCurrentUserError = (error: string): Action<string> => {
 }
 
 // Thunk function
-export const loginAction = (authCode: string): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
+export const loginAction = ({code}: {code: string}): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
   // Create User
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
     return new Promise<void>((resolve) => {
       dispatch({ type: ACTIONS_ENUM.CURRENT_USER_REQUESTED, arg: true});
-      httpService.post<User>('/auth', { code: authCode }).
+      httpService.post<User>('auth/google', { code } ).
         then(user => dispatch(setCurrentUser(user)))
         .catch((error: Error) => dispatch(setCurrentUserError(error.message)));
     })
