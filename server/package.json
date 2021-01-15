@@ -29,6 +29,8 @@
     "google-apis": "^1.0.0",
     "google-auth-library": "6.0.1",
     "knex": "^0.21.12",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
     "objection": "^2.2.3",
     "pg": "^8.5.1",
     "socket.io-server": "^1.0.0-b",

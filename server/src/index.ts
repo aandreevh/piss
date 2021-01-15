@@ -1,10 +1,8 @@
 import express from 'express';
 import Knex from 'knex';
 import { Model } from 'objection';
-import {Server, Path, GET, PathParam} from 'typescript-rest';
 import config from '../knexfile';
 import auth from './controllers/auth';
-import { UserService } from './controllers/user';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
@@ -14,7 +12,7 @@ const knex = Knex(config.development);
 
 Model.knex(knex);
 const app: express.Application = express();
-const secret = process.env.COOKIE_SECRET || 'seeecret';
+const secret = process.env.COOKIE_SECRET;
 
 
 app.use(cookieParser(secret));

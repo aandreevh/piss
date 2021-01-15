@@ -2,7 +2,11 @@ import Auth  from '../service/auth-service';
 import express from 'express';
 
 const router = express.Router();
+
 router.post('/google', async (request, response) => {
+  const COOKIE_NAME = 'Auth';
+  const COOKIE_AGE = 18000000;
+
   const client = Auth.authClient;
   const code = request.body;
   const asdf = await Auth.authClient.getToken(code);
@@ -12,11 +16,11 @@ router.post('/google', async (request, response) => {
     audience: process.env.GOOGLE_CLIENT_ID!
   });
 
-
-  response.cookie('Auth', asdf.tokens.id_token, {
+  response.cookie(COOKIE_NAME, asdf.tokens.id_token, {
     httpOnly: true,
-    maxAge: 18000000
+    maxAge: COOKIE_AGE
   });
+
   response.json( {
     name: ticket.getPayload()?.name,
     email: ticket.getPayload()?.email,
