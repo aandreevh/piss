@@ -1,4 +1,4 @@
-import { BaseError } from "../../utils/base-error";
+import BaseError  from "../../utils/base-error";
 
 export class TokenNotValidError extends BaseError{
     public tokenId? : string

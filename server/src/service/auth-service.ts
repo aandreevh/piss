@@ -1,4 +1,4 @@
-import { LoginTicket, OAuth2Client } from "google-auth-library";
+import shit, { LoginTicket, OAuth2Client, } from "google-auth-library";
 import { TokenNotValidError } from "./error/token-not-valid";
 
 const CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
@@ -46,6 +46,10 @@ class AuthenticationService {
     const picture = payload?.picture;
 
     return {name,email,picture};
+  }
+
+  public async getNewAccessToken(refreshToken: string) {
+    this.authClient.refreshAccessToken()
   }
 
   private async fetchPayload(idToken : string){

@@ -1,7 +1,17 @@
 import { Request,Response,NextFunction } from "express";
 import Auth from '../service/auth-service';
+import UserService from '../service/user-service';
 
-export default (req : Request, res : Response, next : NextFunction)=>{
+export default async (req : Request, res : Response, next : NextFunction)=>{
     const accessToken = req.cookies[Auth.COOKIE_NAME];
+    try {
+        await UserService.findByAccessToken(accessToken);
+    } catch(error) {
+        res.status(401);
+    }
+    
+    
+
+
     
 }

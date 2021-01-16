@@ -1,4 +1,5 @@
 import { BaseModel } from './base-mode';
+import { Message } from './message';
 
 export class User extends BaseModel {
   name!: string;
@@ -8,4 +9,11 @@ export class User extends BaseModel {
   idToken!: string;
   accessToken!: string;
   refreshToken!: string;
+
+  // maybe it will be useful in some situations :D
+  // messages?: Message[];
+
+  static get tableName() {
+    return 'users';
+  }
 }

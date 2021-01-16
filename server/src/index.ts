@@ -5,6 +5,7 @@ import config from '../knexfile';
 import auth from './controllers/auth';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import authMiddleware from './middleware/auth';
 
 
 require('dotenv').config();
@@ -26,11 +27,16 @@ app.use(
   })
 );
 
-console.log(`secret  ${secret}`);
+
 
 // Server.buildServices(app, UserService, AuthService);
 const port = process.env.PORT || 12345;
 app.use('/auth', auth);
+
+app.use(authMiddleware);
+
+
+
 
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
