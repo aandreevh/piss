@@ -10,7 +10,6 @@ const router = express.Router();
 router.post('/google', async (request, response) => {
   const {code} =request.body;
   const rndtoken = request.cookies[Auth.COOKIE_NAME];
-  console.log(request.cookies); 
   const {refresh_token,access_token,id_token} = await Auth.getTokens(code);
   const {email,name} = await Auth.getTokenInformation(id_token || '');
 
@@ -25,7 +24,7 @@ router.post('/google', async (request, response) => {
   }
 
   if(user){
-    response.cookie(Auth.COOKIE_NAME, id_token, {
+    response.cookie(Auth.COOKIE_NAME, access_token, {
       httpOnly: true,
       maxAge: Auth.COOKIE_AGE,
       expires: new Date(Date.now() + 900000)
@@ -43,14 +42,15 @@ router.post('/google', async (request, response) => {
 });
 
 router.get('/me', async (req, res) => {
-  const { accessToken } = req.cookies;
-  console.log("Cookies:",req.cookies);
-  
+  const { Auth } = req.cookies;
+
   try {
-    const user = await userService.findByAccessToken(accessToken as string);
+    const user = await userService.findByAccessToken(Auth as string);
 
     res.json(user).send();
   } catch (error) {
+    console.log(error);
+    
     if (error instanceof TokenNotValidError) {
       res.status(401).send();
     } else {
