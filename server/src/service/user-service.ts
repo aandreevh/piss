@@ -32,11 +32,13 @@ class UserService {
     }
 
   public async findByAccessToken(accessToken: string) {
+    const user = await User.query().where('access_token', accessToken).omit(User,['access_token','id_token','refresh_token']);
     
-    const user = await User.query().where('access_token',accessToken).omit(User,['access_token','id_token','refresh_token']);
     if (user.length < 1) {
       throw new TokenNotValidError(accessToken);
     }
+
+    return user[0];
   }
 
 }

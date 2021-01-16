@@ -33,18 +33,20 @@ export const loginAction = ({code}: {code: string}): ThunkAction<Promise<void>, 
       dispatch({ type: ACTIONS_ENUM.CURRENT_USER_REQUESTED, arg: true});
       httpService.post<User>('auth/google', { code } ).
         then(user => dispatch(setCurrentUser(user)))
-        .catch((error: Error) => dispatch(setCurrentUserError(error.message)));
+        .catch((error: Error) => dispatch(setCurrentUserError(error.message)))
+        .finally(() => resolve());
     })
   }
 }
 
 export const checkCurrentUser = (): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
-    return new Promise<void>((resolve) => {
-      dispatch({ type: ACTIONS_ENUM.CURRENT_USER_REQUESTED, arg: true});
-      httpService.get<User>('auth/me', {})
-        .then(user => dispatch(setCurrentUser(user)))
-        .catch((error: Error) => dispatch(setCurrentUserError(error.message)));
-    })
+    return httpService.get<User>('auth/me', {})
+      .then(user => {
+        return dispatch(setCurrentUser(user));
+      })
+      .catch((error: Error) =>  {
+        return dispatch(setCurrentUserError(error.message)) })
+      .then(() => console.log('dsasa'));
   }
 }

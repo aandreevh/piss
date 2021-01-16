@@ -13,9 +13,6 @@ import { useQuery } from '../../../hooks/useQuery';
 import { CurrentUserProvider } from '../current-user-context';
 
 export default function App() {
-  const { user } = useSelector((state: State) => state.currentUserState);
-  const dispatch = useDispatch();
-  useQuery('auth/me',{}, null);
   return (
     <>
     <CurrentUserProvider>

@@ -7,6 +7,7 @@ import {Provider} from 'react-redux';
 import theme from './theme';
 import configureStore from './redux/store-config';
 import { State } from './model/state';
+import { checkCurrentUser } from './redux/actions/user-actions';
 
 const state: State = {
   users: [],
@@ -18,7 +19,7 @@ const state: State = {
   loadingStatus: false,
   currentUserState: {
     user: null,
-    loading: false,
+    loading: true,
     error: ''
   },
   error: null

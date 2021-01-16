@@ -46,11 +46,8 @@ router.get('/me', async (req, res) => {
 
   try {
     const user = await userService.findByAccessToken(Auth as string);
-
     res.json(user).send();
-  } catch (error) {
-    console.log(error);
-    
+  } catch (error) {    
     if (error instanceof TokenNotValidError) {
       res.status(401).send();
     } else {
