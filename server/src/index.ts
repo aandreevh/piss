@@ -16,7 +16,7 @@ const app: express.Application = express();
 const secret = process.env.COOKIE_SECRET;
 
 
-app.use(cookieParser(secret));
+app.use(cookieParser());
 app.use(express.json());
 
 
@@ -34,9 +34,6 @@ const port = process.env.PORT || 12345;
 app.use('/auth', auth);
 
 app.use(authMiddleware);
-
-
-
 
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);

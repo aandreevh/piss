@@ -41,8 +41,9 @@ export const loginAction = ({code}: {code: string}): ThunkAction<Promise<void>, 
 export const checkCurrentUser = (): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
     return new Promise<void>((resolve) => {
+      console.log('dsadsaadsdasadsads');
       dispatch({ type: ACTIONS_ENUM.CURRENT_USER_REQUESTED, arg: true});
-      httpService.get<User>('/me', {})
+      httpService.get<User>('auth/me', {})
         .then(user => dispatch(setCurrentUser(user)))
         .catch((error: Error) => dispatch(setCurrentUserError(error.message)));
     })

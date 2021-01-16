@@ -13,9 +13,11 @@ export const AuthContext = React.createContext<string | null>(null);
 export function CurrentUserProvider({ children }: CurrentUserProviderProps) {
   const { loading } = useSelector((state: State) => state.currentUserState);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(checkCurrentUser);
-  }, []);
+  dispatch(checkCurrentUser);
+
+  // useEffect(() => {
+  //   console.log('sadassd');
+  // }, []);
 
   return !loading ? <AuthContext.Provider value={'hackUser'}>{children}</AuthContext.Provider> : <CircularProgress/>;
 }

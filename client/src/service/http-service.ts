@@ -26,6 +26,7 @@ class HttpService {
   }
 
   async get<T>(path: string, body: {[key: string]: any}) {
+    const url = `${this.url}/${path}`;
     return await fetch(this.url, {
       method: 'GET',
       credentials: 'same-origin'
