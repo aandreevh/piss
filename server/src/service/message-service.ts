@@ -1,8 +1,9 @@
 import { Message } from "../model/message";
+import { User } from "../model/user";
 
 class MessageService {
   private static defaultCount = 100;
-  getLastMessages(count?: number) {
+  async getLastMessages(count?: number) {
     let limit: number;
     limit = 100;
 
@@ -10,9 +11,16 @@ class MessageService {
       limit  = count; 
     }
 
-    Message
+    return await Message
     .query()
     .limit(limit)
-    .withGraphFetched('users');
+    .withGraphFetched('users')
+    .modifyGraph('users', builder => {
+      builder.select('username', 'name');
+    });
+  }
+
+  async create(message: string, user: User) {
+    
   }
 }

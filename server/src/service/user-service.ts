@@ -14,7 +14,7 @@ class UserService {
       refreshToken,
       accessToken,
       idToken
-    }).omit(User,['access_token','id_token','refresh_token']);
+    }).select('username', 'name', 'created_at', 'updated_at', 'id');
   }
 
   public async updateWithoutRefreshToken(username: string, 
@@ -28,11 +28,11 @@ class UserService {
         accessToken,
         idToken,
         name
-      }).omit(User,['access_token','id_token','refresh_token']);
+      }).select('username', 'name', 'created_at', 'updated_at', 'id');
     }
 
   public async findByAccessToken(accessToken: string) {
-    const user = await User.query().where('access_token', accessToken).omit(User,['access_token','id_token','refresh_token']);
+    const user = await User.query().where('access_token', accessToken).select('username', 'name', 'created_at', 'updated_at', 'id');
     
     if (user.length < 1) {
       throw new TokenNotValidError(accessToken);

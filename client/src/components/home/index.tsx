@@ -6,6 +6,7 @@ import { State } from '../../model/state';
 import { useDispatch, useSelector } from 'react-redux';
 import * as userActions from '../../redux/actions/user-actions';
 import { User } from '../../model/user'
+import MessageComponent from '../message';
 
 
 export default function Home() {
@@ -22,7 +23,7 @@ export default function Home() {
     <div className={classes.content}>
       <div className={classes.centeredContent}>
         <h1>My home page</h1>
-        <MyForm onFormSubmitted={() => console.log('sadas')} />
+        <MessageComponent />
       </div>
     </div>
     </>

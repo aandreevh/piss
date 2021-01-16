@@ -30,10 +30,7 @@ router.post('/google', async (request, response) => {
       expires: new Date(Date.now() + 900000)
     });
 
-    response.json({
-      username: user.username,
-      name: user.name,
-    });
+    response.json(user);
   }else{
     response.status(400).send();
   }
