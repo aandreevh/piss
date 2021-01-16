@@ -19,7 +19,6 @@ router.post('/google', async (request, response) => {
      user = await UserService.create(email,access_token,refresh_token,name,id_token);
   }else if(email && access_token && name && id_token){
      user = await UserService.updateWithoutRefreshToken(email,access_token,name,id_token);
-     console.log('the workflow should be here');
   }else{
     response.status(400).send();
     return;
@@ -29,6 +28,7 @@ router.post('/google', async (request, response) => {
     response.cookie(Auth.COOKIE_NAME, id_token, {
       httpOnly: true,
       maxAge: Auth.COOKIE_AGE,
+      expires: new Date(Date.now() + 900000)
     });
 
     response.json({
@@ -44,16 +44,17 @@ router.post('/google', async (request, response) => {
 
 router.get('/me', async (req, res) => {
   const { accessToken } = req.cookies;
-  console.log(`cookies ${req.cookies}`);
-    console.log(`signed cookies ${req.signedCookies}`);
+  console.log("Cookies:",req.cookies);
+  
   try {
     const user = await userService.findByAccessToken(accessToken as string);
-    console.log('vasilev e pedal');
-    res.json(user);
+
+    res.json(user).send();
   } catch (error) {
     if (error instanceof TokenNotValidError) {
       res.status(401).send();
     } else {
+      
       res.status(500).send();
     }
   }

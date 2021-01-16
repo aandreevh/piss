@@ -15,10 +15,8 @@ Model.knex(knex);
 const app: express.Application = express();
 const secret = process.env.COOKIE_SECRET;
 
-
 app.use(cookieParser());
 app.use(express.json());
-
 
 app.use(
   cors({

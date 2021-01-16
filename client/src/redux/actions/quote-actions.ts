@@ -30,7 +30,7 @@ export const getQuote = (): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
     return new Promise<void>((resolve) => {
       dispatch({ type: ACTIONS_ENUM.QUOTE_REQUESTED, arg: true});
-      fetch('https://ron-swanson-quotes.herokuapp.com/v2/quotes')
+      fetch('https://ron-swanson-quotes.herokuapp.com/v2/quotes',{ credentials: 'same-origin' })
         .then(response => response.json())
         .then(data => {
           dispatch(setQuoteAction(data.toString()));

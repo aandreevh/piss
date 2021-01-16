@@ -8,7 +8,7 @@ const CLIENT_PORT = process.env.CLIENT_PORT;
 
 class AuthenticationService {
   readonly COOKIE_NAME = 'Auth';
-  readonly COOKIE_AGE = 18000000;
+  readonly COOKIE_AGE = 180000000;
 
   private authClient: OAuth2Client;
 
