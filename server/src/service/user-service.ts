@@ -8,16 +8,28 @@ class UserService {
     refreshToken: string, 
     name: string, 
     idToken: string): Promise<User> {
-    const user = await User.query().insertAndFetch({
+    return await User.query().insertAndFetch({
       name,
       username,
       refreshToken,
       accessToken,
       idToken
-    });
-
-    return user;
+    }).omit(User,['access_token','id_token','refresh_token']);
   }
+
+  public async updateWithoutRefreshToken(username: string, 
+    accessToken: string, 
+    name: string, 
+    idToken: string){
+    const user = await User.query().findOne('username',username);
+
+
+    return await user.$query().updateAndFetch({
+        accessToken,
+        idToken,
+        name
+      }).omit(User,['access_token','id_token','refresh_token']);
+    }
 
   public async findByAccessToken(accessToken: string) {
     const user = await User.query().where({accessToken});

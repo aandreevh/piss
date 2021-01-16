@@ -8,8 +8,8 @@ export async function up(knex: Knex): Promise<void> {
     table.integer('user_id').unsigned().notNullable();
     table.string('message').notNullable();
     table.foreign('user_id').references('id').inTable('users');
-    table.timestamp("created_at").notNullable();
-    table.timestamp("updated_at").notNullable();
+    table.string("created_at").notNullable();
+    table.string("updated_at").notNullable();
   });
 }
 

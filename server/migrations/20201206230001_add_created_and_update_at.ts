@@ -3,8 +3,8 @@ import * as Knex from "knex";
 
 export async function up(knex: Knex): Promise<void> {
   await knex.schema.alterTable('users', table => {
-    table.timestamp('created_at').notNullable(); // created at timestamp
-    table.timestamp('updated_at').notNullable(); // updated at timestamp
+    table.string('created_at').notNullable(); // created at timestamp
+    table.string('updated_at').notNullable(); // updated at timestamp
   });
 }
 

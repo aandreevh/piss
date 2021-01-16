@@ -10,6 +10,9 @@ class MessageService {
       limit  = count; 
     }
 
-    Message.query().limit(limit);
+    Message
+    .query()
+    .limit(limit)
+    .withGraphFetched('users');
   }
 }
