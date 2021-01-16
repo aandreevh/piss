@@ -25,7 +25,8 @@ export const useStyles = makeStyles(theme => createStyles({
   message: {
     width: '100%',
     height: '120px',
-    backgroundColor: 'grey'
+    backgroundColor: '#2b2b2b',
+    color: 'white'
   },
   
 }));

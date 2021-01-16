@@ -6,14 +6,13 @@ import auth from './controllers/auth';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import authMiddleware from './middleware/auth';
-
+import * as socketIO from 'socket.io';
 
 require('dotenv').config();
 const knex = Knex(config.development);
 
 Model.knex(knex);
 const app: express.Application = express();
-const secret = process.env.COOKIE_SECRET;
 
 app.use(cookieParser());
 app.use(express.json());
@@ -33,6 +32,13 @@ app.use('/auth', auth);
 
 app.use(authMiddleware);
 
-app.listen(port, () => {
+const server = require('http').Server(app);
+server.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
-})
+});
+
+const io = socketIO.default(server);
+io.on('connection', (socket) => {
+  console.log('in socket');
+  socket.broadcast.emit('hi');
+});

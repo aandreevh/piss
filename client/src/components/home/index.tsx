@@ -7,25 +7,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as userActions from '../../redux/actions/user-actions';
 import { User } from '../../model/user'
 import MessageComponent from '../message';
+import  { Widget } from 'react-chat-widget';
+import SocketIOClient, {Socket} from 'socket.io-client';
+const ENDPOINT = "http://localhost:12345";
 
 
 export default function Home() {
-  const classes = useStyles();
-  const usersState = useSelector(({users}: State) => users);
-  const dispatch = useDispatch();
-  // const updateState = (username: string, password: string, name: string) => {
-  //   console.log(username);
-  //   dispatch(userActions.login({username, password, name} as User));
-  // };
+  const [response, setResponse] = useState("");
+  const [socket, setSocketState] = useState<SocketIOClient.Socket | null>(null);
+  useEffect(() => {
+
+    const curr = SocketIOClient(ENDPOINT);
+    
+    curr.on("successful_connection", (data: any) => {
+      setResponse(data);
+    });
+    setSocketState(socket);
+
+  }, []);
+  console.log('qj mi huq socketio');
+
+  
   return (
-    <>
-    <NavbarComponent key="navbar"></NavbarComponent>
-    <div className={classes.content}>
-      <div className={classes.centeredContent}>
-        <h1>My home page</h1>
-        <MessageComponent />
-      </div>
-    </div>
-    </>
-  );
+
+
+    <MessageComponent user={{username: 'Yavor', name: 'Yavkata'}} createdAt="today" message="Maikata si e ebalo" />
+  )
 }
