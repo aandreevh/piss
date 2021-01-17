@@ -39,10 +39,10 @@ router.post('/google', async (request, response) => {
 });
 
 router.get('/me', async (req, res) => {
-  const { Auth } = req.cookies;
+  const accessToken = req.cookies.Auth;
 
   try {
-    const user = await userService.findByAccessToken(Auth as string);
+    const user = await userService.findByAccessToken(accessToken as string);
     res.json(user).send();
   } catch (error) {    
     if (error instanceof TokenNotValidError) {
