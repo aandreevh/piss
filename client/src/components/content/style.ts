@@ -8,9 +8,10 @@ export const useStyles = makeStyles(theme => createStyles({
   },
   item: {
     marginTop: '10px',
-    fontSize: '1rem',
-    color: 'green',
-
+    fontSize: '24px'
+  },
+  content: {
+    marginTop: '50px',
   },
   error: {
     color: 'red',

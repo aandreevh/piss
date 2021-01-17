@@ -3,7 +3,7 @@ import { Model, snakeCaseMappers} from 'objection';
 export class BaseModel extends Model {
   createdAt!: string;
   updatedAt!: string;
-
+  id!: number
   static get columnNameMappers() {
     return snakeCaseMappers();
   }

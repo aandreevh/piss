@@ -10,9 +10,5 @@ export default async (req : Request, res : Response, next : NextFunction)=>{
     } catch(error) {
         res.status(401);
     }
-    next();
-    
-
-
-    
+    next();    
 }

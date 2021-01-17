@@ -12,10 +12,9 @@ export const useStyles = makeStyles(theme => createStyles({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'baseline',
-    width: '100%',
+    width: 'calc(100% - 10px)',
     justifyContent: 'flex-end',
-    // padding: '5px'
-    marginLeft: '10px'
+    marginRight: '10px'
   },
 
   icon: {
@@ -23,10 +22,26 @@ export const useStyles = makeStyles(theme => createStyles({
   },
   
   message: {
-    width: '100%',
-    height: '120px',
-    backgroundColor: '#2b2b2b',
-    color: 'white'
+    backgroundColor: 'gray',
+    color: 'white',
+    padding: '10px',
+    borderRadius: '90',
+    lineBreak: 'strict'
   },
+
+  myMessage: {
+    backgroundColor: 'blue',
+    color: 'white',
+    padding: '10px',
+    borderRadius: '90',
+    lineBreak: 'strict'
+  },
+
+  createdAt: {
+    fontStyle: 'italic',
+    fontWeight: 'normal',
+    fontSize: '12px',
+    marginLeft: '10px'
+  }
   
 }));

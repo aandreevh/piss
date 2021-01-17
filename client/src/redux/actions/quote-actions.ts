@@ -39,9 +39,7 @@ export const getQuote = (): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
           dispatch(setQuoteError(error.message));
         })
         .then(() => {
-          console.log("dsaadsadsdasdasadsads");
           setLoadingStatusAction(false);
-          console.log('end of shit');
           resolve()
         })
     })

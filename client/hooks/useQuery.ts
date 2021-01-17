@@ -15,7 +15,6 @@ export function useQuery(path: string, queryParams: object | null, initialValue:
     let isCanceled = false;
     (async () => {
       setIsLoading(true);
-      console.log('dasdasdasdasdas');
       try {
         const result = await httpService.get<User>(path, {
           params: queryParams,
@@ -23,7 +22,6 @@ export function useQuery(path: string, queryParams: object | null, initialValue:
         });
         setErrorMessage('');
         if (!isCanceled) {
-          console.log('dsaasdsasd')
           dispatch(setCurrentUser(result as User))
         }
       } catch (error) {

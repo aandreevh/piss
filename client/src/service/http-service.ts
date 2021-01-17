@@ -6,7 +6,6 @@ class HttpService {
 
   async post<T>(path: string, body: {[key: string]: any}) {
     const url = `${this.url}/${path}`;
-    console.log(JSON.stringify(body));
     return await fetch(url, {
       method: 'POST',
       headers: {

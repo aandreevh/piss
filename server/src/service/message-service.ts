@@ -14,13 +14,30 @@ class MessageService {
     return await Message
     .query()
     .limit(limit)
-    .withGraphFetched('users')
-    .modifyGraph('users', builder => {
-      builder.select('username', 'name');
-    });
+    .withGraphFetched('user')
+    .modifyGraph('user', builder => {
+      builder.select('username', 'name', 'id');
+    })
+    .orderBy('id', 'desc');
+
   }
 
-  async create(message: string, user: User) {
-    
+  async create(message: string, userId: number) {
+    const m = await Message.query().insertAndFetch({
+      message,
+      userId,
+    });
+
+    const res = await Message
+    .query()
+    .findById(m.id)
+    .withGraphFetched('user')
+    .modifyGraph('user', builder => {
+      builder.select('username', 'name', 'id');
+    });
+
+    return res;
   }
 }
+
+export default new MessageService();

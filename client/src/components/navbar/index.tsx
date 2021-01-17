@@ -10,21 +10,28 @@ import { State } from '../../model/state';
 export default function NavbarComponent() {
   const classes = useStyles();
   const user = useSelector((state: State) => state.currentUserState.user);
-  console.log(user);
   return (
     <>
       <AppBar position="fixed" className={classes.navBar}>
         <Link to="/">
           <IconButton>
-            <HomeIcon />
+            <ChatIcon />
           </IconButton>
         </Link>
+
         <Avatar
           alt={user.name}
           style={{color: 'black'}}
         >
           {user.name[0]}
         </Avatar>
+
+        <Link to='/content'>
+          <IconButton>
+            <HomeIcon />
+          </IconButton>  
+        </Link>
+       
       </AppBar>
     </>
   )

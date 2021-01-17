@@ -7,12 +7,15 @@ import { Redirect } from 'react-router-dom';
 import { State } from '../../model/state';
 import { loginAction } from '../../redux/actions/user-actions';
 import httpService from '../../service/http-service';
+import NavbarComponent from '../navbar';
+import { useStyles } from './styles';
 
 
 export default function LoginComponent() {
-  // redux boilerplate
   const currentUser = useSelector((state: State) => state.currentUserState.user);
   const error = useSelector((state: State) => state.currentUserState.error);
+  const classes = useStyles();
+  
   const dispatch = useDispatch();
 
   const onSuccess = useCallback((res: any) => dispatch(loginAction(res)), []);
@@ -24,10 +27,12 @@ export default function LoginComponent() {
   }, [currentUser])
 
   return (
-    <div>
-      <h1>Login page  </h1>
+    <>
+    <div className={classes.container}>
       {
         currentUser ? <Redirect to='/'/> :
+        <div className={classes.centered}>
+
         <GoogleLogin
           // extract that in my environment file
           clientId={process.env.CLIENT_ID}
@@ -38,9 +43,10 @@ export default function LoginComponent() {
           accessType="offline"
         >
         </GoogleLogin> 
+        </div>
       }
       
     </div>
-    
+    </>
   );
 }

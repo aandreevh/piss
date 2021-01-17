@@ -22,6 +22,11 @@ const state: State = {
     loading: true,
     error: ''
   },
+  currentMessages: {
+    loading: true,
+    messages: [],
+    error: ''
+  },
   error: null
 };
 
